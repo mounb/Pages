@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>固定表头</title>
+    <style>
+        body{ overflow:hidden;}/*让body不出现滚动条*/
+        table {
+            background-color: #FFFFFF;
+            border-collapse: collapse;
+            border-left: 1px solid #000;
+            border-spacing: 1px;
+            border-top: 1px solid #000;
+            margin: 0;
+            width:2000px;/*整个表格宽度，可以不填，不填默认100%;*/
+        }
+        .pp-list {
+            background: none repeat scroll 0 0 #8F8F9A;
+            border-spacing: 1px;
+            margin: 0;
+            overflow: hidden;
+        }
+        .pp-list td, .pp-list th {
+            border-bottom: 1px solid #000;
+            border-right: 1px solid #000;
+            text-align: center;
+        }
+        .t_table {
+            overflow: auto;/*让内容表格外面的div自动有滚动条*/
+            max-height: 353px;
+        }
+    </style>
+</head>
+<body>
+
+<table  class="pp-list" id="table_head">
+    <thead>
+    <tr>
+        <th class="ckTh"><input type="checkbox"></th>
+        <th width="55"><span column="serialId" class="trade-sort">工单流水</span></th>
+        <th width="55"><span column="status" class="trade-sort">订单状态</span></th>
+        <th width="50">收货人</th>
+        <th>收货地址</th>
+        <th>联系电话</th>
+        <th>买家留言</th>
+        <th>卖家留言</th>
+        <th width="90"><span column="sellTime" class="trade-sort">拍单日期</span></th>
+        <th width="90"><span column="payTime" class="trade-sort">付款时间</span></th>
+    </tr>
+    </thead>
+</table>
+
+<div class="t_table">
+    <table class="pp-list">
+        <tbody>
+        <tr style="display: none; background: none repeat scroll 0% 0% rgb(255, 255, 255);" id="tradesHeader"></tr>
+
+
+
+        <tr onclick="findTrade(1)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="1" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>杨*&nbsp; </td>
+            <td>福建省&nbsp;
+                厦门市&nbsp;
+                思明区&nbsp;
+                厦门大学学生公寓**&nbsp;</td>
+            <td>15260******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-24 13:37</td>
+            <td>12-06-24 13:37</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+
+        <tr onclick="findTrade(2)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="2" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>等待用户确认收货&nbsp;</td>
+            <td>孔**&nbsp; </td>
+            <td>四川省&nbsp;
+                成都市&nbsp;
+                温江区&nbsp;
+                文化路251号观澜半岛*******&nbsp;</td>
+            <td>13880******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-25 21:56</td>
+            <td>12-06-25 21:57</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+
+        <tr onclick="findTrade(3)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="3" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>刘*&nbsp; </td>
+            <td>山东省&nbsp;
+                潍坊市&nbsp;
+                奎文区&nbsp;
+                玉清街北海路交叉口********&nbsp;</td>
+            <td>15094******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-23 18:11</td>
+            <td>12-06-23 18:12</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+        <tr class="red_class" onclick="findTrade(4)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+
+            <td class="ckTd"><input type="checkbox" value="4" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>发货处理中&nbsp;</td>
+            <td>马**&nbsp; </td>
+            <td>江苏&nbsp;
+                无锡&nbsp;
+                宜兴市&nbsp;
+                宜兴市宜城街道东山西路********&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>我要一件粉色，一件米色，一件白色&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-27 08:27</td>
+            <td>12-06-27 08:29</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+        <tr class="red_class" onclick="findTrade(5)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+
+            <td class="ckTd"><input type="checkbox" value="5" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>李**&nbsp; </td>
+            <td>北京&nbsp;
+                北京市&nbsp;
+                海淀区&nbsp;
+                北京海淀区太平路*****—1—801&nbsp;</td>
+            <td>18210******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>买三送一 每个颜色发一件 路丸   6.18&nbsp;</td>
+            <td>12-06-18 20:19</td>
+            <td>12-06-19 09:41</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+
+        <tr onclick="findTrade(6)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="6" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>谢**&nbsp; </td>
+            <td>湖南省&nbsp;
+                益阳市&nbsp;
+                南县&nbsp;
+                大通湖河口*******&nbsp;</td>
+            <td>13762******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-13 00:45</td>
+            <td>12-06-13 11:19</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+        <tr class="red_class" onclick="findTrade(7)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+
+            <td class="ckTd"><input type="checkbox" value="7" name="tradeCheckBox"></td>
+            <td>1011206275335</td>
+            <td>成功&nbsp;</td>
+            <td>谢**&nbsp; </td>
+            <td>湖南省&nbsp;
+                益阳市&nbsp;
+                南县&nbsp;
+                大通湖河口********&nbsp;</td>
+            <td>13762******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>尺码还是这个   买二送一的  两件杏色的一件黑色的  路丸   6.13&nbsp;</td>
+            <td>12-06-13 00:48</td>
+            <td>12-06-13 00:48</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+
+        <tr onclick="findTrade(8)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="8" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>谢**&nbsp; </td>
+            <td>湖南省&nbsp;
+                益阳市&nbsp;
+                南县&nbsp;
+                大通湖河口*******&nbsp;</td>
+            <td>13762******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-13 11:18</td>
+            <td>12-06-13 11:22</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+
+        <tr onclick="findTrade(9)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="9" name="tradeCheckBox"></td>
+            <td>1011206275337</td>
+            <td>关闭&nbsp;</td>
+            <td>蒋*&nbsp; </td>
+            <td>上海&nbsp;
+                上海市&nbsp;
+                浦东新区&nbsp;
+                *******&nbsp;</td>
+            <td>13816******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-27 10:10</td>
+            <td>12-06-27 10:12</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+        <tr onclick="findTrade(10)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+            <td class="ckTd"><input type="checkbox" value="10" name="tradeCheckBox"></td>
+            <td>1011206275338</td>
+            <td>成功&nbsp;</td>
+            <td>陈*&nbsp; </td>
+            <td>山东省&nbsp;
+                东营市&nbsp;
+                河口区&nbsp;
+                山东省 东营市 河口区*****&nbsp;</td>
+            <td>18754******&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-20 13:20</td>
+            <td>12-06-20 13:24</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+
+        <tr class="red_class" onclick="findTrade(11)" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);">
+
+
+
+            <td class="ckTd"><input type="checkbox" value="11" name="tradeCheckBox"></td>
+            <td>10112062753**</td>
+            <td>成功&nbsp;</td>
+            <td>缪**&nbsp; </td>
+            <td>上海&nbsp;
+                上海市&nbsp;
+                普陀区&nbsp;
+                桃浦路300弄*******&nbsp;</td>
+            <td>18017******&nbsp;</td>
+            <td>束胸三送一的话最好别送大红色的哟，能送米色的最好。嘻嘻
+                希望明天能发货&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>12-06-23 02:32</td>
+            <td>12-06-23 02:34</td>
+            <td style="display:none"><input type="text" value="NORMAL" class="abnormalTypeText"></td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script>
+    //利用js让头部与内容对应列宽度一致。
+    function fix(){
+        for(var i=0;i<=$('.t_table .pp-list tr:last').find('td:last').index();i++){
+            $('th').eq(i).css('width',$('.t_table .pp-list tr:last').find('td').eq(i).width());
+        }
+    }
+    window.load=fix();
+    $(window).resize(function(){
+        return fix();
+    });
+
+    //当有横向滚动条时，需要此js，时内容滚动头部也能滚动。
+    $('.t_table').scroll(function(){
+        $('#table_head').css('margin-left',-($('.t_table').scrollLeft()));
+    });
+</script>
+</body>
+</html>

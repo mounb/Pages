@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <script src="js/jquery-1.7.2.js"></script>
+    <style type="text/css">
+        .scroll_table{ height:100px; overflow:auto;}
+        table{border-collapse:collapse; }
+        table thead{background-color:#FFFFFF}
+        th,td{border:1px solid #CCC;text-align: center}
+        .thead{ position:fixed; z-index:100;background-color:#FFF}
+        .w_100{ width:100px;}
+        .w_60{ width:60px;}
+    </style>
+</head>
+
+<body>
+<div class="scroll_table">
+    <table id="data_table1">
+        <thead>
+        <tr><th class="w_100">固定表头1</th><th class="w_100">固定表头2</th><th class="w_60">表头3</th><th class="w_60">表头4</th><th class="w_60">表头5</th><th class="w_60">表头4</th><th class="w_60">表头5</th><th class="w_60">表头4</th></tr>
+        </thead>
+        <tbody>
+        <tr><td class="w_100">固定表头1-1</td><td class="w_100">固定表头2</td><td class="w_60">表头3</td><td class="w_60">表头4</td><td class="w_60">表头5</td><td class="w_60">表头4</td><td class="w_60">表头5</td><td class="w_60">表头4</td></tr>
+        <tr><td>固定表头1-2</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-3</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-4</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-5</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-6</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-7</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-8</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-9</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-10</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-11</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-12</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        <tr><td>固定表头1-13</td><td>固定表头2</td><td>表头3</td><td>表头4</td><td>表头5</td><td>表头4</td><td>表头5</td><td>表头4</td></tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    $(function(){
+        var browser_version=$.browser.version;
+        $(".scroll_table").scroll(function(e) {
+            if($(this).scrollTop()>0)
+            {
+                if($(".thead").length==0)
+                {
+                    var thead=$('<table class="thead">'+$("table thead").html()+'</table>');
+                    $(".scroll_table").prepend(thead);
+                }
+                else if('6.0'==browser_version||'7.0'==browser_version)
+                {
+
+                    $(".thead").css("position","relative");
+                    $(".thead").css("top",$(this).scrollTop());
+                }
+            }
+            else
+            {
+                $(".thead").remove();
+            }
+        });
+    });
+</script>
+</html>
