@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <script language="javascript" src="resizeCol.js"></script>
+</head>
+<table id="tbl" border=0 cellspacing="1" cellpadding="5" bgcolor=#660000>
+    <tr><td nowrap bgcolor=#bbbbbb>一</td><td nowrap bgcolor=#bbbbbb>标题二</td><td nowrap bgcolor=#bbbbbb>标题三</td><td nowrap bgcolor=#bbbbbb>标题四</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+    <tr><td bgcolor=#bbbbbb>内容A</td><td bgcolor=#ffffff>内容B</td><td bgcolor=#ffffff>内容C</td><td bgcolor=#ffffff>内容D</td></tr>
+</table>
+<script language="javascript">
+    setResizeAble(tbl);
+    var onDrag=0,gblResizeObj;
+    var blStartMove = false;
+    var blTd = false;
+
+    function setResizeAble(argTable){    //组件接口函数
+        with(argTable){
+            attachEvent('onmousedown',colResizeStart)
+            attachEvent('onmousemove',colResizeIng)
+            attachEvent('onmouseup',colResizeEnd)
+            //        attachEvent('onmouseout',colResizeOut)        //针对最末列引起的问题加入，但又影响到其他列，还是不加
+        }
+    }
+
+    function findPos(obj){        //取得本元素的绝对坐标
+        var x=obj.offsetLeft,    y=obj.offsetTop;
+        while(obj=obj.offsetParent){x += obj.offsetLeft;y += obj.offsetTop;}
+        this.intX=x;    this.intY=y;
+        return this
+    }
+
+    function colResizeStart(){    //开始拖动
+        blStartMove = true;
+        var srcObj=event.srcElement,tblParent=srcObj.parentElement;
+        while(tblParent.tagName!='TABLE')tblParent=tblParent.parentElement
+
+        if(srcObj.tagName!='TD')return
+        if(srcObj.parentElement.rowIndex==0){
+            //        if(srcObj.offsetWidth - event.offsetX <=3 && srcObj.cellIndex!=srcObj.parentElement.cells.length - 1){
+            if(srcObj.offsetWidth - event.offsetX <=3){        //如果取消最末列的动态改列宽功能可用上句
+                gblResizeObj=tblParent.rows[srcObj.parentElement.rowIndex].cells[srcObj.cellIndex];
+                onDrag=1;
+            }
+            if(event.offsetX <=3 && srcObj.cellIndex != 0){
+                gblResizeObj=tblParent.rows[srcObj.parentElement.rowIndex].cells[srcObj.cellIndex - 1];
+                onDrag=1;
+            }
+        }    //else{
+        //if(srcObj.offsetHeight - event.offsetY <=3 && srcObj.parentElement.rowIndex < tblParent.rows.length - 1){
+        //    gblResizeObj=tblParent.rows[srcObj.parentElement.rowIndex].cells[srcObj.cellIndex];
+        //    onDrag=2;
+        //}
+        //}
+    }
+
+    function colResizeIng(){    //正在拖动
+        var objSrcTd=event.srcElement,tblParent=objSrcTd.parentElement;
+        while(tblParent=tblParent.parentElement)if(tblParent.tagName=='TABLE')break;
+        if(objSrcTd.tagName == "TD" && (Math.abs(event.offsetX) <= 3 || Math.abs(objSrcTd.offsetWidth - event.offsetX)<=3) && objSrcTd.cellIndex != 0 && objSrcTd.parentElement.rowIndex==0){
+            blTd = true;
+            objSrcTd.document.body.style.cursor='col-resize';
+        }
+        else{
+            //        if(objSrcTd.tagName == "TD" && Math.abs(objSrcTd.offsetHeight - event.offsetY)<=3 && objSrcTd.parentElement.rowIndex > 0 && objSrcTd.parentElement.rowIndex < tblParent.rows.length - 1){
+            //            objSrcTd.document.body.style.cursor='row-resize';
+            //        }else{
+            if(blStartMove)
+                objSrcTd.document.body.style.cursor='default';
+            //        }
+        }
+        if(onDrag!=1 && onDrag!=2)return;
+        var trSrc=gblResizeObj.parentElement;
+
+        if(onDrag==1){
+            var intPosX=(new findPos(gblResizeObj)).intX
+            gblResizeObj.style.pixelWidth = event.x - intPosX;
+        }
+        //    if(onDrag==2){        //改变行高
+        //        var intHeight=0,intPosY=(new findPos(gblResizeObj)).intY
+        //        intHeight = objSrcTd.offsetHeight + event.y - intPosY;
+        //        tblParent.style.pixelHeight = intHeight * tblParent.rows.length
+        //    }
+    }
+
+    function colResizeEnd(){    //拖动结束
+        blStartMove = false;
+        onDrag=0;
+        document.body.style.cursor='default'
+    }
+
+    /**//*    function colResizeOut(){    //鼠标移出Table范围则拖动结束
+     if(event.srcElement.tagName=="TABLE"){
+     onDrag=0;
+     document.body.style.cursor='default';
+     }
+     }
+     */
+</script>
